@@ -11,27 +11,28 @@ import jadex.bdiv3.annotation.GoalResult;
 @Goal
 public class DataMiningGoal {
 	@GoalParameter
-	private int userid;
+	private String userid;
 	@GoalResult
-	protected List<RecommendedItem> mahoutRecommRes;
+	protected String miningRes;
 	
-	public DataMiningGoal(int userid) {
+	public DataMiningGoal(String userid) {
 		this.userid = userid;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
-	public List<RecommendedItem> getMahoutRecommRes() {
-		return mahoutRecommRes;
+	public String getMiningRes() {
+		return miningRes;
 	}
 
-	public void setMahoutRecommRes(List<RecommendedItem> mahoutRecommRes) {
-		this.mahoutRecommRes = mahoutRecommRes;
+	public void setMiningRes(String miningRes) {
+		this.miningRes = miningRes;
 	}
+	
 }

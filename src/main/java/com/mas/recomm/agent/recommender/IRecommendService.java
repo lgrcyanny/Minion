@@ -13,6 +13,6 @@ import jadex.commons.future.IFuture;
  */
 public interface IRecommendService {
 	
-	public IFuture<List<RecommendedMovieItem>> generateRecommendations(int userid); 
+	public IFuture<List<RecommendedMovieItem>> generateRecommendations(String userid); 
 
 }

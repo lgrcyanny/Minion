@@ -10,19 +10,20 @@ import jadex.bdiv3.annotation.GoalResult;
 @Goal
 public class RecommendationGoal {
 	@GoalParameter
-	protected int userid;
+	protected String userid; // GoalParameter must be Object, not int
+	
 	@GoalResult
 	protected List<RecommendedMovieItem> reslist;
 	
-	public RecommendationGoal(int userid) {
+	public RecommendationGoal(String userid) {
 		this.userid = userid;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

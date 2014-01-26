@@ -2,7 +2,9 @@ package com.mas.recomm.agent.user;
 
 import javax.swing.SwingUtilities;
 
+import com.mas.recomm.agent.common.DataMiningGoal;
 import com.mas.recomm.agent.common.RecommendationGoal;
+import com.mas.recomm.agent.datamining.IDataMiningService;
 import com.mas.recomm.agent.recommender.IRecommendService;
 
 import jadex.bdiv3.BDIAgent;
@@ -23,10 +25,6 @@ import jadex.micro.annotation.RequiredServices;
 
 @Agent
 @Description("The user interface Agent")
-@RequiredServices(@RequiredService(name="recomm-service", type=IRecommendService.class, 
-		binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM)))
-@Goals(@Goal(clazz=RecommendationGoal.class))
-@Plans(@Plan(trigger=@Trigger(goals=RecommendationGoal.class), body=@Body(service=@ServicePlan(name="recomm-service"))))
 public class UserBDI {
 	@Agent
 	BDIAgent agent;

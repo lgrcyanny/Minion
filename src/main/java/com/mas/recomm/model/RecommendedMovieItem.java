@@ -3,16 +3,16 @@ package com.mas.recomm.model;
 public class RecommendedMovieItem {
 	private int id;
 	private String title;
-	private String genre;
-	private String score;
+	private String genres;
+	private float score;
 	public RecommendedMovieItem() {
-		this(-1, null, null, null);
+		this(-1, null, null, 0);
 	}
-	public RecommendedMovieItem(int id, String title, String genre, String score) {
+	public RecommendedMovieItem(int id, String title, String genre, float score) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.genre = genre;
+		this.genres = genre;
 		this.score = score;
 	}
 	public int getId() {
@@ -27,16 +27,16 @@ public class RecommendedMovieItem {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getGenre() {
-		return genre;
+	public String getGenres() {
+		return genres;
 	}
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setGenres(String genres) {
+		this.genres = genres;
 	}
-	public String getScore() {
+	public float getScore() {
 		return score;
 	}
-	public void setScore(String score) {
+	public void setScore(float score) {
 		this.score = score;
 	}	
 }

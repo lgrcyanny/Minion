@@ -8,6 +8,6 @@ import jadex.commons.future.IFuture;
 
 public interface IDataMiningService {
 	
-	public IFuture<List<RecommendedItem>> mineRecommendations(int userid);
+	public IFuture<List<RecommendedItem>> mineRecommendations(String userid);
 
 }
