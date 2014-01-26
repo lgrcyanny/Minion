@@ -39,18 +39,20 @@ The Minion system adopts the [MovieLens 1M dataset](http://grouplens.org/dataset
 Installation
 ==============
 The following steps is available for MacOS or Linux system.
-1. git clone https://github.com/lgrcyanny/Minion
 
-2. Config dataset:
-+ Install MySQL
-+ Download [MovieLens 1M dataset](http://grouplens.org/datasets/movielens/)
-+ Create database movielens
-+ Import the movielens.sql into database:
+1. git clone https://github.com/lgrcyanny/Minion<BR>
+
+2. Install MySQL<BR>
+
+3. Download [MovieLens 1M dataset](http://grouplens.org/datasets/movielens/)<BR>
+
+4. Create database movielens<BR>
+Import the movielens.sql into database:<BR>
 ```sh
 $ mysql -u root -proot movielens < movielens.sql
-
 ```
-+ Import the 1M data into database
+
+5. Import the 1M data into database<BR>
 ```sh
 $ mysql -u root -p
 mysql>  load data local infile 'ratings.dat' into table tbl_ratings fields terminated by '::'  enclosed by '' lines terminated by '\n' (userid, movieid, rating, timestamp);
@@ -58,16 +60,16 @@ mysql>  load data local infile 'movies.dat' into table tbl_movies fields termina
 mysql>  load data local infile 'users.dat' into table tbl_users fields terminated by '::'  enclosed by '' lines terminated by '\n' (userid, gender, age, occupation, zipcode);
 ```
 
-3. Download [Eclipse IDE for Java EE DevelopersEclipse IDE for Java EE Developers](http://www.eclipse.org/downloads/)
+6. Download [Eclipse IDE for Java EE DevelopersEclipse IDE for Java EE Developers](http://www.eclipse.org/downloads/)
 
-4. Run maven build on Minion project, then all dependencies will be downloaded automatically.
+7. Run maven build on Minion project, then all dependencies will be downloaded automatically.
 
-5. Run Minion Application
+8. Run Minion Application
 Open Run configurations, choose project: mas-recomm-engine, Main class jadex.base.Starter
 
-6. After the Jadex Control Center(JCC) opened, add the classpath which is like "mas-recomm-engine-0.0.1-SNAPSHOT.jar"
+9. After the Jadex Control Center(JCC) opened, add the classpath which is like "mas-recomm-engine-0.0.1-SNAPSHOT.jar"
 
-7. Start All Agents and you can enjoy the recommendation engine.
+10. Start All Agents and you can enjoy the recommendation engine.
 
 The installation is complicated, good luck and be careful.
 
