@@ -40,7 +40,7 @@ public class SearchBDI implements ISearchService{
 
 	@Override
 	public IFuture<List<ResultSet>> searchRecommendedDetails(List<RecommendedItem> miningRes) {
-		System.out.println("searchDetails start " + miningRes);
+		System.out.println("searchDetails start ");
 //		System.out.println("search for " + miningRes);
 		List<ResultSet> ret = new ArrayList<ResultSet>();
 		try {

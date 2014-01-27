@@ -33,7 +33,7 @@ import javax.swing.SwingUtilities;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
 import com.ibm.icu.util.TimeUnit;
-import com.mas.recomm.agent.common.DataMiningGoal;
+import com.mas.recomm.agent.common.DataMiningUserCFGoal;
 import com.mas.recomm.agent.common.RecommendationGoal;
 import com.mas.recomm.agent.datamining.IDataMiningService;
 import com.mas.recomm.agent.recommender.IRecommendService;
@@ -109,6 +109,7 @@ public class UserInputGui extends JFrame{
 													String displayStr = item.getId() + "-" + item.getTitle() + "-" + item.getGenres() + "-" + item.getScore() + "\n";
 													resultTextArea.append(displayStr);
 												}
+												System.out.println("=========Recommendation Done!==============\n\n");
 											}
 										});
 										

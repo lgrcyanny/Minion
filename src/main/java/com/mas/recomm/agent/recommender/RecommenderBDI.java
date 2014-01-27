@@ -15,7 +15,7 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import com.mas.recomm.agent.common.DataMiningGoal;
+import com.mas.recomm.agent.common.DataMiningUserCFGoal;
 import com.mas.recomm.agent.common.RecommendationBuildGoal;
 import com.mas.recomm.agent.common.RecommendationGoal;
 import com.mas.recomm.agent.common.SearchGoal;

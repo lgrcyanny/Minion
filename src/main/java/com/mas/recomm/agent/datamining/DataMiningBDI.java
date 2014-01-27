@@ -22,30 +22,47 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import com.mas.recomm.agent.common.DataMiningGoal;
+import com.mas.recomm.agent.common.DataMiningItemCFGoal;
+import com.mas.recomm.agent.common.DataMiningUserCFGoal;
+import com.mas.recomm.agent.common.StrategyGoal;
+import com.mas.recomm.agent.strategy.IStrategyService;
 import com.mas.recomm.model.DataSourceFactory;
 import com.mas.recomm.model.MovieRatingsDataModel;
 
 import jadex.bdiv3.BDIAgent;
 import jadex.bdiv3.annotation.Belief;
+import jadex.bdiv3.annotation.Body;
 import jadex.bdiv3.annotation.Goal;
 import jadex.bdiv3.annotation.Goals;
 import jadex.bdiv3.annotation.Plan;
+import jadex.bdiv3.annotation.Plans;
 import jadex.bdiv3.annotation.Publish;
+import jadex.bdiv3.annotation.ServicePlan;
 import jadex.bdiv3.annotation.Trigger;
+import jadex.bridge.service.RequiredServiceInfo;
 import jadex.bridge.service.annotation.Service;
 import jadex.commons.future.Future;
 import jadex.commons.future.IFuture;
 import jadex.micro.annotation.Agent;
 import jadex.micro.annotation.AgentCreated;
+import jadex.micro.annotation.Binding;
 import jadex.micro.annotation.Description;
 import jadex.micro.annotation.ProvidedService;
 import jadex.micro.annotation.ProvidedServices;
+import jadex.micro.annotation.RequiredService;
+import jadex.micro.annotation.RequiredServices;
 
 @Agent
 @Description("DataMiningBDI Agent, provide mining recommendations service.")
 @Service
 @ProvidedServices(@ProvidedService(type=IDataMiningService.class))
+@RequiredServices({@RequiredService(name="strategy-service", type=IStrategyService.class, binding=@Binding(scope= RequiredServiceInfo.SCOPE_PLATFORM)),
+		@RequiredService(name="item-cf-service", type=IItemCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM)),
+		@RequiredService(name="user-cf-service", type=IUserCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM))})
+@Goals({@Goal(clazz=StrategyGoal.class), @Goal(clazz=DataMiningUserCFGoal.class)})
+@Plans({@Plan(trigger=@Trigger(goals=StrategyGoal.class), body=@Body(service=@ServicePlan(name="strategy-service"))), 
+		@Plan(trigger=@Trigger(goals=DataMiningUserCFGoal.class), body=@Body(service=@ServicePlan(name="user-cf-service"))),
+		@Plan(trigger=@Trigger(goals=DataMiningItemCFGoal.class), body=@Body(service=@ServicePlan(name="item-cf-service")))})
 public class DataMiningBDI implements IDataMiningService{
 	@Agent
 	BDIAgent agent;
@@ -58,25 +75,15 @@ public class DataMiningBDI implements IDataMiningService{
 	@Override
 	public IFuture<List<RecommendedItem>> mineRecommendations(String userid) {
 		System.out.println("miningRecommendations start");
-		List<RecommendedItem> miningRes = new ArrayList<RecommendedItem>();
-		try {
-			DataModel model = new FileDataModel(new File("src/main/resources/ratings.dat"));
-			//DataModel model = new MovieRatingsDataModel();
-			UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
-			similarity.setPreferenceInferrer(new AveragingPreferenceInferrer(model));
-			UserNeighborhood neighborhood = new NearestNUserNeighborhood(3, similarity, model);
-			Recommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-			CachingRecommender cachingRecommender = new CachingRecommender(recommender);
-			List<RecommendedItem> result = cachingRecommender.recommend(Integer.parseInt(userid), 10);
-			// If don't create GenericRecommendedItem, the return result will have zero ID, and value, I dont know why
-			for (Iterator<RecommendedItem> iterator = result.iterator(); iterator.hasNext(); ) {
-				RecommendedItem item = iterator.next();
-				miningRes.add(new GenericRecommendedItem(item.getItemID(), item.getValue()));
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String strategy = (String) agent.dispatchTopLevelGoal(new StrategyGoal(userid)).get();
+		List<RecommendedItem> miningRes = null;
+	
+		if (strategy.equals(StrategyGoal.STRATEGY_CF_USER)) {
+			miningRes = (List<RecommendedItem>) agent.dispatchTopLevelGoal(new DataMiningUserCFGoal(new String[]{userid, strategy})).get();
+		} else {
+			miningRes = (List<RecommendedItem>) agent.dispatchTopLevelGoal(new DataMiningItemCFGoal(new String[]{userid, strategy})).get();
 		}
+		
 		System.out.println("miningRecommendations end " + miningRes);
 		return new Future<List<RecommendedItem>>(miningRes);
 	}

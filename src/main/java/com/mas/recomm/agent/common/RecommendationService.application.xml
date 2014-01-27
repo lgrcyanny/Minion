@@ -7,6 +7,9 @@
 	<p><strong>DataMiningAgent: </strong> Mining recommendations based on Mahout library.</p>
 	<p><strong>SearchAgent: </strong>After data mining done, search details about recommended items.</p>
 	<p><strong>RecommendationBuilderAgent:</strong>Build recommendations for display.</p>
+	<p><strong>StrategyAgent: </strong> Make algorithm strategy decision on ItemCF and UserCF</p>
+	<p><strong>UserCFAgent: </strong>Mine recommendations with User CF algorithm.</p>
+	<p><strong>ItemCFAgent: </strong> Mine recommendations with Item CF algorithm.</p>
 -->
 <applicationtype xmlns="http://jadex.sourceforge.net/jadex"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -21,6 +24,7 @@
   		<import>com.mas.recomm.agent.recommender.*</import>
   		<import>com.mas.recomm.agent.search.*</import>
   		<import>com.mas.recomm.agent.user.*</import>
+  		<import>com.mas.recomm.agent.strategy.*</import>
   		<import>com.mas.recomm.model.*</import>
 		<import>java.util.*</import>
 		<import>jadex.bridge.service.search.*</import>
@@ -34,6 +38,9 @@
 		<componenttype name="DataMining" filename="com/mas/recomm/agent/datamining/DataMiningBDI.class"/>
 		<componenttype name="Search" filename="com/mas/recomm/agent/search/SearchBDI.class"/>
 		<componenttype name="RecommendationBuilder" filename="com/mas/recomm/agent/recommbuilder/RecommendationBuilderBDI.class"/>
+		<componenttype name="Strategy" filename="com/mas/recomm/agent/strategy/StrategyBDI.class"/>
+		<componenttype name="UserCF" filename="com/mas/recomm/agent/datamining/UserCFBDI.class"/>
+		<componenttype name="ItemCF" filename="com/mas/recomm/agent/datamining/ItemCFBDI.class"/>
 	</componenttypes>
 	
 	<properties>
@@ -52,6 +59,12 @@
 				<component type="Search">
 				</component>
 				<component type="RecommendationBuilder">
+				</component>
+				<component type="Strategy">
+				</component>
+				<component type="UserCF">
+				</component>
+				<component type="ItemCF">
 				</component>
 			</components>
 		</configuration>		
