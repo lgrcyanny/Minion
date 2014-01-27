@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	<H3>Multi Agent Recommendation Engine</H3>
+
+	<p><strong>UserAgent:</strong> Get User input. and trigger recommendation generation.</p>
+	<p><strong>RecommenderAgent:</strong> Control the whole process of recommendation.</p>
+	<p><strong>DataMiningAgent: </strong> Mining recommendations based on Mahout library.</p>
+	<p><strong>SearchAgent: </strong>After data mining done, search details about recommended items.</p>
+	<p><strong>RecommendationBuilderAgent:</strong>Build recommendations for display.</p>
+-->
+<applicationtype xmlns="http://jadex.sourceforge.net/jadex"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jadex.sourceforge.net/jadex 
+	                    http://jadex.sourceforge.net/jadex-application-2.4.xsd"
+	name="RecommendationService" package="com.mas.recomm.agent.common"
+	autoshutdown="true">
+	
+	<imports>
+  		<import>com.mas.recomm.agent.datamining.*</import>
+  		<import>com.mas.recomm.agent.recommbuilder.*</import>
+  		<import>com.mas.recomm.agent.recommender.*</import>
+  		<import>com.mas.recomm.agent.search.*</import>
+  		<import>com.mas.recomm.agent.user.*</import>
+  		<import>com.mas.recomm.model.*</import>
+		<import>java.util.*</import>
+		<import>jadex.bridge.service.search.*</import>
+		<import>jadex.commons.future.*</import>
+		<import>jadex.bridge.service.*</import>
+	</imports>
+	
+	<componenttypes>
+		<componenttype name="Recommender" filename="com/mas/recomm/agent/recommender/RecommenderBDI.class"/>
+		<componenttype name="User" filename="com/mas/recomm/agent/user/UserBDI.class"/>
+		<componenttype name="DataMining" filename="com/mas/recomm/agent/datamining/DataMiningBDI.class"/>
+		<componenttype name="Search" filename="com/mas/recomm/agent/search/SearchBDI.class"/>
+		<componenttype name="RecommendationBuilder" filename="com/mas/recomm/agent/recommbuilder/RecommendationBuilderBDI.class"/>
+	</componenttypes>
+	
+	<properties>
+	
+	</properties>
+	
+	<configurations>
+		<configuration name="Recommendation Engine">
+			<components>
+				<component type="User">
+				</component>
+				<component type="Recommender">
+				</component>
+				<component type="DataMining">
+				</component>
+				<component type="Search">
+				</component>
+				<component type="RecommendationBuilder">
+				</component>
+			</components>
+		</configuration>		
+	</configurations>
+
+</applicationtype>
