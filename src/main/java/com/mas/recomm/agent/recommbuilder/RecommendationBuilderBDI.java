@@ -30,8 +30,8 @@ import jadex.micro.annotation.ProvidedServices;
 @Agent
 @Description("RecommendationBuilerBDI Agent, build recommended items for display.")
 @Service
-@ProvidedServices(@ProvidedService(type=IRecommendationBuildService.class))
-public class RecommendationBuilderBDI implements IRecommendationBuildService{
+@Goals(@Goal(clazz=RecommendationBuildGoal.class, publish=@Publish(type=IRecommendationBuildService.class)))
+public class RecommendationBuilderBDI{
 	@Agent
 	protected BDIAgent agent;
 	
@@ -40,9 +40,10 @@ public class RecommendationBuilderBDI implements IRecommendationBuildService{
 		
 	}
 
-	@Override
-	public IFuture<List<RecommendedMovieItem>> buildRecommendationRes(
-			List<RecommendedItem> miningRes, List<ResultSet> searchRes) {
+	@Plan(trigger=@Trigger(goals=RecommendationBuildGoal.class))
+	public List<RecommendedMovieItem> buildRecommendationRes(List[] params) {
+		List<RecommendedItem> miningRes = params[0];
+		List<ResultSet> searchRes = params[1];
 		System.out.println("buildRecommendationRes start " + miningRes);
 		List<RecommendedMovieItem> ret = new ArrayList<RecommendedMovieItem>();
 		Iterator<RecommendedItem> iterator1 = miningRes.iterator();
@@ -64,6 +65,6 @@ public class RecommendationBuilderBDI implements IRecommendationBuildService{
 			}
 		}
 		System.out.println("buildRecommendationRes end");
-		return new Future<List<RecommendedMovieItem>>(ret);
+		return ret;
 	}
 }

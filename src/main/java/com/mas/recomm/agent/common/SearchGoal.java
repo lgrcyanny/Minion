@@ -12,28 +12,29 @@ import jadex.bdiv3.annotation.GoalResult;
 @Goal
 public class SearchGoal {
 	@GoalParameter
-	protected List<RecommendedItem> mahoutRes;
+	protected List<RecommendedItem> miningRes;
+
 	@GoalResult
-	protected ResultSet recommDetails;
-	
+	protected List<ResultSet> serchRes;
+
 	public SearchGoal(List<RecommendedItem> mahoutRes) {
-		this.mahoutRes = mahoutRes;
+		this.miningRes = mahoutRes;
 	}
 
 	public List<RecommendedItem> getMahoutRes() {
-		return mahoutRes;
+		return miningRes;
 	}
 
 	public void setMahoutRes(List<RecommendedItem> mahoutRes) {
-		this.mahoutRes = mahoutRes;
+		this.miningRes = mahoutRes;
 	}
 
-	public ResultSet getRecommDetails() {
-		return recommDetails;
+	public List<ResultSet> getRecommDetails() {
+		return serchRes;
 	}
 
-	public void setRecommDetails(ResultSet recommDetails) {
-		this.recommDetails = recommDetails;
+	public void setRecommDetails(List<ResultSet> recommDetails) {
+		this.serchRes = recommDetails;
 	}
-		
+
 }

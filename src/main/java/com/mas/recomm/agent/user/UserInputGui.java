@@ -85,49 +85,30 @@ public class UserInputGui extends JFrame{
 
 					@Override
 					public IFuture<Void> execute(IInternalAccess ia) {
-						System.out.println("userid" + userid);
-						IntermediateFuture<IRecommendService> service = (IntermediateFuture<IRecommendService>) SServiceProvider.getServices(agent.getServiceProvider(), IRecommendService.class, RequiredServiceInfo.SCOPE_PLATFORM);
-						service.addResultListener(new IntermediateDefaultResultListener<IRecommendService>() {
-
+						
+						final List<RecommendedMovieItem> result = (List<RecommendedMovieItem>) agent.dispatchTopLevelGoal(new RecommendationGoal(userid)).get();
+						
+						SwingUtilities.invokeLater(new Runnable() {
+							
 							@Override
-							public void intermediateResultAvailable(
-									IRecommendService imService) {
-								IFuture<List<RecommendedMovieItem>> futRes = imService.generateRecommendations(userid);
-								futRes.addResultListener(new DefaultResultListener<List<RecommendedMovieItem>>() {
-
-									@Override
-									public void resultAvailable(
-											final List<RecommendedMovieItem> result) {
-										SwingUtilities.invokeLater(new Runnable() {
-											
-											@Override
-											public void run() {
-												resultTextArea.setText("Recommended Movies:\n");
-												Iterator<RecommendedMovieItem> iterator = result.iterator();
-												while(iterator.hasNext()) {
-													RecommendedMovieItem item = iterator.next();
-													String displayStr = item.getId() + "-" + item.getTitle() + "-" + item.getGenres() + "-" + item.getScore() + "\n";
-													resultTextArea.append(displayStr);
-												}
-												System.out.println("=========Recommendation Done!==============\n\n");
-											}
-										});
-										
-									}
-								});
+							public void run() {
+								resultTextArea.setText("Recommended Movies:\n");
+								Iterator<RecommendedMovieItem> iterator = result.iterator();
+								while(iterator.hasNext()) {
+									RecommendedMovieItem item = iterator.next();
+									String displayStr = item.getId() + "-" + item.getTitle() + "-" + item.getGenres() + "-" + item.getScore() + "\n";
+									resultTextArea.append(displayStr);
+								}
+								System.out.println("=========Recommendation Done!==============\n\n");
 							}
 						});
 						
 						return IFuture.DONE;
 					}
-				
-				});	
+				});
 				
 			}
-			
-			
 		});
-		
 	}
 	
 	private void addWindowCloseListener () {

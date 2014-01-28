@@ -14,31 +14,21 @@ import com.mas.recomm.model.RecommendedMovieItem;
 @Goal
 public class RecommendationBuildGoal {
 	@GoalParameter
-	protected List<RecommendedItem> mahoutRes;
-	@GoalParameter
-	protected ResultSet recommDetails;
+	protected List[] params;
+
 	@GoalResult
 	protected List<RecommendedMovieItem> recommList;
-	
-	public RecommendationBuildGoal(List<RecommendedItem> mahoutRes, ResultSet recommDetails) {
-		this.mahoutRes = mahoutRes;
-		this.recommDetails = recommDetails;
+
+	public RecommendationBuildGoal(List[] params) {
+		this.params = params;
 	}
 
-	public List<RecommendedItem> getMahoutRes() {
-		return mahoutRes;
+	public List[] getParams() {
+		return params;
 	}
 
-	public void setMahoutRes(List<RecommendedItem> mahoutRes) {
-		this.mahoutRes = mahoutRes;
-	}
-
-	public ResultSet getRecommDetails() {
-		return recommDetails;
-	}
-
-	public void setRecommDetails(ResultSet recommDetails) {
-		this.recommDetails = recommDetails;
+	public void setParams(List[] params) {
+		this.params = params;
 	}
 
 	public List<RecommendedMovieItem> getRecommList() {

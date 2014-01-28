@@ -22,6 +22,7 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
+import com.mas.recomm.agent.common.DataMiningGoal;
 import com.mas.recomm.agent.common.DataMiningItemCFGoal;
 import com.mas.recomm.agent.common.DataMiningUserCFGoal;
 import com.mas.recomm.agent.common.StrategyGoal;
@@ -55,15 +56,23 @@ import jadex.micro.annotation.RequiredServices;
 @Agent
 @Description("DataMiningBDI Agent, provide mining recommendations service.")
 @Service
-@ProvidedServices(@ProvidedService(type=IDataMiningService.class))
-@RequiredServices({@RequiredService(name="strategy-service", type=IStrategyService.class, binding=@Binding(scope= RequiredServiceInfo.SCOPE_PLATFORM)),
-		@RequiredService(name="item-cf-service", type=IItemCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM)),
-		@RequiredService(name="user-cf-service", type=IUserCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM))})
-@Goals({@Goal(clazz=StrategyGoal.class), @Goal(clazz=DataMiningUserCFGoal.class)})
-@Plans({@Plan(trigger=@Trigger(goals=StrategyGoal.class), body=@Body(service=@ServicePlan(name="strategy-service"))), 
-		@Plan(trigger=@Trigger(goals=DataMiningUserCFGoal.class), body=@Body(service=@ServicePlan(name="user-cf-service"))),
-		@Plan(trigger=@Trigger(goals=DataMiningItemCFGoal.class), body=@Body(service=@ServicePlan(name="item-cf-service")))})
-public class DataMiningBDI implements IDataMiningService{
+@RequiredServices({
+	@RequiredService(name="strategy-service", type=IStrategyService.class, binding=@Binding(scope= RequiredServiceInfo.SCOPE_PLATFORM)),
+	@RequiredService(name="item-cf-service", type=IItemCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM)),
+	@RequiredService(name="user-cf-service", type=IUserCFService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM))
+})
+@Goals({
+	@Goal(clazz=DataMiningGoal.class, publish=@Publish(type=IDataMiningService.class)),
+	@Goal(clazz=StrategyGoal.class), 
+	@Goal(clazz=DataMiningUserCFGoal.class),
+	@Goal(clazz=DataMiningItemCFGoal.class)
+})
+@Plans({
+	@Plan(trigger=@Trigger(goals=StrategyGoal.class), body=@Body(service=@ServicePlan(name="strategy-service"))), 
+	@Plan(trigger=@Trigger(goals=DataMiningUserCFGoal.class), body=@Body(service=@ServicePlan(name="user-cf-service"))),
+	@Plan(trigger=@Trigger(goals=DataMiningItemCFGoal.class), body=@Body(service=@ServicePlan(name="item-cf-service")))}
+)
+public class DataMiningBDI {
 	@Agent
 	BDIAgent agent;
 	
@@ -72,8 +81,8 @@ public class DataMiningBDI implements IDataMiningService{
 		
 	}
 	
-	@Override
-	public IFuture<List<RecommendedItem>> mineRecommendations(String userid) {
+	@Plan(trigger=@Trigger(goals=DataMiningGoal.class))
+	public List<RecommendedItem> mineRecommendations(String userid) {
 		System.out.println("miningRecommendations start");
 		String strategy = (String) agent.dispatchTopLevelGoal(new StrategyGoal(userid)).get();
 		List<RecommendedItem> miningRes = null;
@@ -85,7 +94,7 @@ public class DataMiningBDI implements IDataMiningService{
 		}
 		
 		System.out.println("miningRecommendations end " + miningRes);
-		return new Future<List<RecommendedItem>>(miningRes);
+		return miningRes;
 	}
 
 }

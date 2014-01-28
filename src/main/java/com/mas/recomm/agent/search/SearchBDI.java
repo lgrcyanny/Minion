@@ -28,8 +28,8 @@ import jadex.micro.annotation.ProvidedServices;
 @Agent
 @Description("SearchBDI Agent, provide searching service for details about recommended items.")
 @Service
-@ProvidedServices(@ProvidedService(type=ISearchService.class))
-public class SearchBDI implements ISearchService{
+@Goals(@Goal(clazz=SearchGoal.class, publish=@Publish(type=ISearchService.class)))
+public class SearchBDI {
 	@Agent
 	BDIAgent agent;
 	
@@ -38,8 +38,8 @@ public class SearchBDI implements ISearchService{
 		
 	}
 
-	@Override
-	public IFuture<List<ResultSet>> searchRecommendedDetails(List<RecommendedItem> miningRes) {
+	@Plan(trigger=@Trigger(goals=SearchGoal.class))
+	public List<ResultSet> searchRecommendedDetails(List<RecommendedItem> miningRes) {
 		System.out.println("searchDetails start ");
 //		System.out.println("search for " + miningRes);
 		List<ResultSet> ret = new ArrayList<ResultSet>();
@@ -57,7 +57,7 @@ public class SearchBDI implements ISearchService{
 			e.printStackTrace();
 		}
 		System.out.println("searchDetails end");
-		return new Future<List<ResultSet>>(ret);
+		return ret;
 	}
 
 }

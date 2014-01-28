@@ -25,6 +25,9 @@ import jadex.micro.annotation.RequiredServices;
 
 @Agent
 @Description("The user interface Agent")
+@RequiredServices(@RequiredService(name="recommendation-service", type=IRecommendService.class, binding=@Binding(scope=RequiredServiceInfo.SCOPE_PLATFORM)))
+@Goals(@Goal(clazz=RecommendationGoal.class))
+@Plans(@Plan(trigger=@Trigger(goals=RecommendationGoal.class), body=@Body(service=@ServicePlan(name="recommendation-service"))))
 public class UserBDI {
 	@Agent
 	BDIAgent agent;
