@@ -17,7 +17,6 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import com.mas.recomm.agent.common.DataMiningUserCFGoal;
 import com.mas.recomm.model.MovieRatingsDataFileModel;
 
 import jadex.bdiv3.BDIAgent;

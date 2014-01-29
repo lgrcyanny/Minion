@@ -3,7 +3,6 @@ package com.mas.recomm.agent.strategy;
 import java.sql.Connection;
 import java.sql.*;
 
-import com.mas.recomm.agent.common.StrategyGoal;
 import com.mas.recomm.model.DataSourceFactory;
 
 import jadex.bdiv3.BDIAgent;

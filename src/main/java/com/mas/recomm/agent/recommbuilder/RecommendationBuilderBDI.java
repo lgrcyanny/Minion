@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
-import com.mas.recomm.agent.common.RecommendationBuildGoal;
 import com.mas.recomm.model.RecommendedMovieItem;
 
 import jadex.bdiv3.BDIAgent;

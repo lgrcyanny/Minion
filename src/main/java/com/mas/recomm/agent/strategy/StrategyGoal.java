@@ -1,4 +1,4 @@
-package com.mas.recomm.agent.common;
+package com.mas.recomm.agent.strategy;
 
 import jadex.bdiv3.annotation.Goal;
 import jadex.bdiv3.annotation.GoalParameter;

@@ -1,4 +1,4 @@
-package com.mas.recomm.agent.common;
+package com.mas.recomm.agent.recommender;
 
 import java.util.List;
 

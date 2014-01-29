@@ -33,10 +33,9 @@ import javax.swing.SwingUtilities;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
 import com.ibm.icu.util.TimeUnit;
-import com.mas.recomm.agent.common.DataMiningUserCFGoal;
-import com.mas.recomm.agent.common.RecommendationGoal;
 import com.mas.recomm.agent.datamining.IDataMiningService;
 import com.mas.recomm.agent.recommender.IRecommendService;
+import com.mas.recomm.agent.recommender.RecommendationGoal;
 import com.mas.recomm.model.RecommendedMovieItem;
 
 

@@ -5,13 +5,12 @@ import java.util.List;
 
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
-import com.mas.recomm.agent.common.DataMiningGoal;
-import com.mas.recomm.agent.common.RecommendationBuildGoal;
-import com.mas.recomm.agent.common.RecommendationGoal;
-import com.mas.recomm.agent.common.SearchGoal;
+import com.mas.recomm.agent.datamining.DataMiningGoal;
 import com.mas.recomm.agent.datamining.IDataMiningService;
 import com.mas.recomm.agent.recommbuilder.IRecommendationBuildService;
+import com.mas.recomm.agent.recommbuilder.RecommendationBuildGoal;
 import com.mas.recomm.agent.search.ISearchService;
+import com.mas.recomm.agent.search.SearchGoal;
 import com.mas.recomm.model.RecommendedMovieItem;
 
 import jadex.bdiv3.BDIAgent;

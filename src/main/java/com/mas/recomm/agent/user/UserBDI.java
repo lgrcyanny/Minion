@@ -2,10 +2,9 @@ package com.mas.recomm.agent.user;
 
 import javax.swing.SwingUtilities;
 
-import com.mas.recomm.agent.common.DataMiningUserCFGoal;
-import com.mas.recomm.agent.common.RecommendationGoal;
 import com.mas.recomm.agent.datamining.IDataMiningService;
 import com.mas.recomm.agent.recommender.IRecommendService;
+import com.mas.recomm.agent.recommender.RecommendationGoal;
 
 import jadex.bdiv3.BDIAgent;
 import jadex.bdiv3.annotation.Body;

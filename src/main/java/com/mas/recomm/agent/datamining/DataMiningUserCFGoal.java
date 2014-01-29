@@ -1,4 +1,4 @@
-package com.mas.recomm.agent.common;
+package com.mas.recomm.agent.datamining;
 
 import java.util.List;
 
@@ -9,23 +9,26 @@ import jadex.bdiv3.annotation.GoalParameter;
 import jadex.bdiv3.annotation.GoalResult;
 
 @Goal
-public class DataMiningGoal {
+public class DataMiningUserCFGoal{
+	public static final int HOMW_MANY = 20;
+	public static final int NEAREST_NEIGHBOUR = 5;
+
 	@GoalParameter
-	protected String userid;
+	protected String[] params;// userid = params[0], strategy = params[1]
 
 	@GoalResult
 	protected List<RecommendedItem> miningRes;
 
-	public DataMiningGoal(String userid) {
-		this.userid = userid;
+	public DataMiningUserCFGoal(String[] params) {
+		this.params = params;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String[] getParams() {
+		return params;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setParams(String[] params) {
+		this.params = params;
 	}
 
 	public List<RecommendedItem> getMiningRes() {

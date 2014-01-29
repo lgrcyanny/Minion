@@ -1,4 +1,4 @@
-package com.mas.recomm.agent.common;
+package com.mas.recomm.agent.search;
 
 import java.sql.ResultSet;
 import java.util.List;

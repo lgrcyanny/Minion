@@ -13,7 +13,6 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 
-import com.mas.recomm.agent.common.DataMiningItemCFGoal;
 import com.mas.recomm.model.MovieRatingsDataFileModel;
 
 import jadex.bdiv3.BDIAgent;

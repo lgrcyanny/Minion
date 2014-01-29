@@ -22,11 +22,8 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import com.mas.recomm.agent.common.DataMiningGoal;
-import com.mas.recomm.agent.common.DataMiningItemCFGoal;
-import com.mas.recomm.agent.common.DataMiningUserCFGoal;
-import com.mas.recomm.agent.common.StrategyGoal;
 import com.mas.recomm.agent.strategy.IStrategyService;
+import com.mas.recomm.agent.strategy.StrategyGoal;
 import com.mas.recomm.model.DataSourceFactory;
 import com.mas.recomm.model.MovieRatingsDataModel;
 

@@ -6,7 +6,6 @@ import java.util.*;
 import org.apache.mahout.cf.taste.impl.recommender.GenericRecommendedItem;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
-import com.mas.recomm.agent.common.SearchGoal;
 import com.mas.recomm.model.DataSourceFactory;
 
 import jadex.bdiv3.BDIAgent;

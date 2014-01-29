@@ -26,10 +26,6 @@
   		<import>com.mas.recomm.agent.user.*</import>
   		<import>com.mas.recomm.agent.strategy.*</import>
   		<import>com.mas.recomm.model.*</import>
-		<import>java.util.*</import>
-		<import>jadex.bridge.service.search.*</import>
-		<import>jadex.commons.future.*</import>
-		<import>jadex.bridge.service.*</import>
 	</imports>
 	
 	<componenttypes>
